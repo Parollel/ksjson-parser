@@ -3,7 +3,7 @@
 IFS=$'\n'
 
 cleanup() {
-    [ -f "${output}" ] && rm "${output}"
+    [[ -f "${output}" ]] && rm "${output}"
 }
 trap cleanup EXIT
 
