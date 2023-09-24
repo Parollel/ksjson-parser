@@ -10,4 +10,4 @@ for file in $(cat json.list); do
     printf "已格式化 %s。\n" "${file}" 1>&2
 done
 
-mkdir -p raw/character raw/path raw/real.character raw/text
+mkdir -p raw/character raw/path raw/real.character raw/text raw/select.path raw/select
