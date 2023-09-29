@@ -17,12 +17,22 @@ jq '[.scenes[].texts[]?[1][0][1]]' "${source}" > "${text}"
 jq '[path(.scenes[].selects[]?)] | map(. = .[:3]) | unique' "${source}" > "${select_path}"
 jq '[.scenes[].selects | select(. != null)] |
     map(reduce .[] as {$text} ([]; . += [$text])) |
-    reduce .[] as $entry ([0];
-        . += (if ((.[0] % 2) != 0)
-            then [$entry]
-            else null
-            end) |
-        .[0] += 1) |
-    .[1:]' "${source}" > "${select}"
+    (. | length) as $len |
+    .[$len] = 1 |
+    until(.[$len] >= $len;
+        if ((.[.[$len] - 1] | type) == "number")
+        then
+            if (.[.[$len]] == .[.[$len] - 1 - .[.[$len] - 1]])
+            then .[.[$len]] = .[.[$len] - 1] + 1
+            end
+        else
+            if (.[.[$len]] == .[.[$len] - 1])
+            then .[.[$len]] = 1
+            end
+        end |
+        .[$len] += 1
+    ) |
+    .[0:$len]
+    ' "${source}" > "${select}"
 
 printf "已处理 %s。\n" "${1}" 1>&2
