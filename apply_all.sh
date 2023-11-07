@@ -1,6 +1,4 @@
 #!/bin/bash
 IFS=$'\n'
 
-for file in $(cat json.list); do
-    bash apply.sh "${file}"
-done
+xargs -a json.list -n1 bash apply.sh

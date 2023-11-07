@@ -3,8 +3,13 @@ IFS=$'\n'
 
 declare format="$(mktemp)"
 
+cleanup() {
+    [[ -f "${format}" ]] && rm "${format}"
+}
+trap cleanup EXIT
+
 ls json > json.list
-for file in $(cat json.list); do 
+cat json.list | while read -r file ; do
     jq . "json/${file}" > "${format}"
     cp "${format}" "json/${file}"
     printf "已格式化 %s。\n" "${file}" 1>&2

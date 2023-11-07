@@ -1,9 +1,7 @@
 #!/bin/bash
 IFS=$'\n'
 
-for file in $(cat json.list); do
-    bash extract.sh "${file}"
-done
+xargs -a json.list -n1 bash extract.sh
 
 cd raw
 find select/ -size '3c' | xargs rm
