@@ -9,10 +9,10 @@ cleanup() {
 trap cleanup EXIT
 
 ls json > json.list
-cat json.list | while read -r file ; do
+while read -r file ; do
     jq . "json/${file}" > "${format}"
     cp "${format}" "json/${file}"
     printf "已格式化 %s。\n" "${file}" 1>&2
-done
+done < json.list
 
 mkdir -p raw/character raw/path raw/real.character raw/text raw/select.path raw/select
