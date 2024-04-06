@@ -35,10 +35,16 @@ for filename in modified_list:
             for ulist_index, ulist_val in enumerate(ujson_val):
                 if ulist_index % 2 == 0:
                     ulist_index //= 2
-                    olist[ulist_index][1][0][0] = ulist_val
+                    if isinstance(olist[ulist_index][1], list):
+                        olist[ulist_index][1][0][0] = ulist_val
+                    else:
+                        olist[ulist_index][1] = ulist_val
                 else:
                     ulist_index //= 2
-                    olist[ulist_index][1][0][1] = ulist_val
+                    if isinstance(olist[ulist_index][1], list):
+                        olist[ulist_index][1][0][1] = ulist_val
+                    else:
+                        olist[ulist_index][2] = ulist_val
     for ujson_index, ujson_val in enumerate(user_select_json):
         if ujson_val != None:
             origin_json['scenes'][ujson_index]['selects'] = ujson_val

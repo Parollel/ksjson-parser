@@ -47,9 +47,16 @@ for filename in modified_list:
                 user_text.append(None)
             user_text[ojson_index] = []
             for otext in ojson_val['texts']:
-                character = otext[1][0][0] if otext[1][0][0] != None else otext[0]
+                character = None
+                text = None
+                if isinstance(otext[1], list):
+                    character = otext[1][0][0] or otext[0]
+                    text = otext[1][0][1]
+                else:
+                    character = otext[1] or otext[0]
+                    text = otext[2]
                 user_text[ojson_index].append(character)
-                user_text[ojson_index].append(otext[1][0][1])
+                user_text[ojson_index].append(text)
         if 'selects' in ojson_val:
             while len(user_select) <= ojson_index:
                 user_select.append(None)
