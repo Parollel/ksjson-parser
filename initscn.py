@@ -8,7 +8,7 @@ release = requests.get(url).json()
 for i in release["assets"]:
     if i["name"] == "psbc-x86_64-linux":
         durl["linux"] = i["browser_download_url"]
-    if i["name"] == "psbc-x86_64-win":
+    if i["name"] == "psbc-x86_64-win.exe":
         durl["win"] = i["browser_download_url"]
 
 print('请输入数字选择您使用的操作系统:')
