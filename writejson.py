@@ -9,7 +9,7 @@ scr_dir = os.path.split(os.path.realpath(__file__))[0]
 os.chdir(scr_dir)
 
 json_file_list = []
-with open('./jsonlist.txt', 'rt') as f:
+with open('./jsonlist.txt', 'rt', encoding = 'utf-8') as f:
     json_file_list = f.read().splitlines(False)
 if not os.path.exists('./last_write_time.txt'):
     modified_list = json_file_list
@@ -22,11 +22,11 @@ for filename in modified_list:
     user_text = []
     user_select = []
 
-    with open('./json/' + filename, 'rt') as f:
+    with open('./json/' + filename, 'rt', encoding = 'utf-8') as f:
         origin_json = json.load(f)
-    with open('./extract/text/' + filename, 'rt') as f:
+    with open('./extract/text/' + filename, 'rt', encoding = 'utf-8') as f:
         user_text_json = json.load(f)
-    with open('./extract/select/' + filename, 'rt') as f:
+    with open('./extract/select/' + filename, 'rt', encoding = 'utf-8') as f:
         user_select_json = json.load(f)
 
     for ujson_index, ujson_val in enumerate(user_text_json):
@@ -49,7 +49,7 @@ for filename in modified_list:
         if ujson_val != None:
             origin_json['scenes'][ujson_index]['selects'] = ujson_val
 
-    with open('./json/' + filename, 'wt') as f:
+    with open('./json/' + filename, 'wt', encoding = 'utf-8') as f:
         json.dump(origin_json, f, ensure_ascii = False, indent = None)
         print(filename + ' write DONE!', file = sys.stderr)
         new_write = True
@@ -57,6 +57,6 @@ for filename in modified_list:
 if not new_write:
     print('No file updated, have a good day!', file = sys.stderr)
 else:
-    with open('./last_write_time.txt', 'wt') as f:
+    with open('./last_write_time.txt', 'wt', encoding = 'utf-8') as f:
         f.write(time.asctime())
         print('Write time updated.', file = sys.stderr)

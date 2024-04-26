@@ -4,7 +4,7 @@ import os
 scr_dir = os.path.split(os.path.realpath(__file__))[0]
 os.chdir(scr_dir)
 
-with open('./jsonlist.txt', 'wt') as jsonlist:
+with open('./jsonlist.txt', 'wt', encoding = 'utf-8') as jsonlist:
     jsonlist.writelines(map(lambda i: i + '\n', os.listdir('./json/')))
     pass
 

@@ -9,7 +9,7 @@ os.chdir(src_dir)
 
 os.makedirs('./out/', exist_ok = True)
 
-with open('./jsonlist.txt', 'rt') as f:
+with open('./jsonlist.txt', 'rt', encoding = 'utf-8') as f:
     json_file_list = f.read().splitlines(False)
 
 for i in json_file_list:

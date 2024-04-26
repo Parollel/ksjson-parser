@@ -23,7 +23,7 @@ def format(elem):
 
 
 json_file_list = []
-with open('./jsonlist.txt', 'rt') as f:
+with open('./jsonlist.txt', 'rt', encoding = 'utf-8') as f:
     json_file_list = f.read().splitlines(False)
 
 modified_list = None
@@ -38,7 +38,7 @@ for filename in modified_list:
     user_text = []
     user_select = []
 
-    with open('./json/' + filename, 'rt') as f:
+    with open('./json/' + filename, 'rt', encoding = 'utf-8') as f:
         origin_json = json.load(f)
 
     for ojson_index, ojson_val in enumerate(origin_json['scenes']):
@@ -63,9 +63,9 @@ for filename in modified_list:
             user_select[ojson_index] = ojson_val['selects']
 
     format_str = '[' + ','.join(list(map(format, user_text))) + '\n]'
-    with open('./extract/text/' + filename, 'wt') as f:
+    with open('./extract/text/' + filename, 'wt', encoding = 'utf-8') as f:
         f.write(format_str)
-    with open('./extract/select/' + filename, 'wt') as f:
+    with open('./extract/select/' + filename, 'wt', encoding = 'utf-8') as f:
         json.dump(user_select, f, ensure_ascii = False, indent = 2)
     print(filename + ' extract DONE!', file = sys.stderr)
     new_extract = True
@@ -73,6 +73,6 @@ for filename in modified_list:
 if not new_extract:
     print('No file updated, have a good day!', file = sys.stderr)
 else:
-    with open('./last_extract_time.txt', 'wt') as f:
+    with open('./last_extract_time.txt', 'wt', encoding = 'utf-8') as f:
         f.write(time.asctime())
         print('Extract time updated.', file = sys.stderr)

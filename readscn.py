@@ -13,5 +13,3 @@ for i in os.listdir('./scn/'):
     print('Processing ' + i, file = sys.stderr)
     subprocess.run(['./psbc', './scn/' + i, './json/' + i[0:-4] + '.json'])
 
-with open('./jsonlist.txt', 'rt') as f:
-    json_file_list = f.read().splitlines(False)

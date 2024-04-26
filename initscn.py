@@ -22,11 +22,11 @@ s = int(i)
 
 if s == 1:
     rf = requests.get(durl["win"])
-    with open('./psbc.exe', "wb") as f:
+    with open('./psbc.exe', "wb", encoding = 'utf-8') as f:
         f.write(rf.content)
 else:
     rf = requests.get(durl["linux"])
-    with open('./psbc', "wb") as f:
+    with open('./psbc', "wb", encoding = 'utf-8') as f:
         f.write(rf.content)
 
 os.makedirs('./scn', exist_ok = True)
