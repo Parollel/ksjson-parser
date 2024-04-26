@@ -6,12 +6,16 @@ import sys
 
 src_dir = os.path.split(os.path.realpath(__file__))[0]
 os.chdir(src_dir)
+os.chdir('./json/')
 
-os.makedirs('./out/', exist_ok = True)
+jsondir = './'
+outdir = '../out/'
 
-with open('./jsonlist.txt', 'rt', encoding = 'utf-8') as f:
+os.makedirs(outdir, exist_ok = True)
+
+with open('../jsonlist.txt', 'rt', encoding = 'utf-8') as f:
     json_file_list = f.read().splitlines(False)
 
 for i in json_file_list:
-    print('Processing ' + i, file = sys.stderr)
-    subprocess.run(['./psbc', './json/' + i, './out/' + i[0:-4] + 'scn'])
+    subprocess.run(['../FreeMoteToolkit/PsBuild.exe', i])
+    os.rename(i[0:-4] + 'psb', outdir + i[0:-4] + 'scn')
