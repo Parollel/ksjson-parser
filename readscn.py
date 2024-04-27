@@ -12,7 +12,7 @@ jsondir = '../json/'
 os.makedirs(jsondir, exist_ok = True)
 
 for f in glob.iglob('*.scn'):
-    subprocess.run(['./FreeMoteToolkit/PsbDecompile.exe', f])
+    subprocess.run(['../FreeMoteToolkit/PsbDecompile.exe', f])
     for s in ['json', 'resx.json']:
         dest = jsondir + f[0:-3] + s
         if os.path.exists(dest):
