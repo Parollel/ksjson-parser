@@ -17,5 +17,5 @@ with open('../jsonlist.txt', 'rt', encoding = 'utf-8') as f:
     json_file_list = f.read().splitlines(False)
 
 for i in json_file_list:
-    subprocess.run(['../FreeMoteToolkit/PsBuild.exe', i])
+    subprocess.run(['../FreeMoteToolkit/PsBuild.exe', '-nr', i])
     os.rename(i[0:-4] + 'psb', outdir + i[0:-4] + 'scn')
